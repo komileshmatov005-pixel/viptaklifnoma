@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wedding Invitation</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #2b3a8c;
+            --gold: #d4af37;
+            --text-dark: #333;
+        }
+
+        body, html { 
+            margin: 0; padding: 0; 
+            font-family: 'Montserrat', sans-serif; 
+            overflow-x: hidden; 
+            background: #fff;
+            scroll-behavior: smooth;
+        }
+
+        /* TIL ALMASHTIRGICH */
+        .lang-switcher {
+            position: fixed; top: 20px; right: 20px; z-index: 10000;
+            background: rgba(255,255,255,0.8); padding: 5px; border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .lang-btn {
+            border: none; background: none; padding: 5px 12px; cursor: pointer;
+            font-weight: 600; font-size: 12px; border-radius: 15px; transition: 0.3s;
+        }
+        .lang-btn.active { background: var(--primary-blue); color: white; }
+
+        /* 1. KONVERT QISMI */
+        #envelope {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--primary-blue);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .seal-container { text-align: center; cursor: pointer; animation: pulse 2s infinite; }
+        .seal-container img { width: 110px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); }
+        .seal-container p { color: white; font-size: 11px; margin-top: 15px; letter-spacing: 2px; }
+
+        /* 2. ASOSIY SAHIFA */
+        #content { display: none; text-align: center; background: #fdfbff; }
+
+        .header-section { background: #f4f7ff; padding: 80px 20px; border-bottom: 2px solid #e0e6f0; }
+        .names { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--primary-blue); margin: 15px 0; }
+        .date-circle {
+            width: 100px; height: 100px; border: 2px solid var(--primary-blue); border-radius: 50%;
+            display: inline-flex; flex-direction: column; justify-content: center;
+            margin: 25px 0; font-weight: bold; color: var(--primary-blue); font-size: 1.3rem;
+        }
+
+        .invitation-body { font-style: italic; line-height: 2; color: #555; padding: 40px 25px; font-size: 1.1rem; max-width: 500px; margin: 0 auto; }
+
+        /* XARITA VA TUGMALAR */
+        .map-section { padding: 50px 20px; background: #fff; }
+        .res-img { width: 100%; max-width: 450px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .btn { display: block; width: 85%; max-width: 300px; margin: 15px auto; padding: 18px; border-radius: 35px; text-decoration: none; font-weight: 600; transition: 0.4s; font-size: 0.9rem; letter-spacing: 1px; }
+        .btn-google { background: var(--primary-blue); color: white; }
+        .btn-yandex { background: #f33e3e; color: white; }
+
+        /* TAYMER */
+        .timer-container { background: var(--primary-blue); color: white; padding: 60px 20px; }
+        .timer-grid { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
+        .t-item { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; min-width: 70px; border: 1px solid rgba(255,255,255,0.2); }
+        .t-item span { display: block; font-size: 1.8rem; font-weight: bold; margin-bottom: 5px; }
+
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="changeLang('uz')">O'zbek</button>
+        <button class="lang-btn" onclick="changeLang('cyrillic')">Ўзбек</button>
+    </div>
+
+    <div id="envelope">
+        <div class="seal-container" onclick="openMe()">
+            <img src="seal.png" alt="Muhr">
+            <p id="tap-text">OCHISH UCHUN BOSING</p>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="header-section">
+            <p class="sub-text" id="sub-text" data-aos="fade-down">Sizni taklif etamiz</p>
+            <h1 class="names" data-aos="zoom-in" data-aos-delay="300">Komil & ???</h1>
+            <div class="date-circle" data-aos="flip-left" data-aos-delay="600">
+                <span>27</span>
+                <span id="month-text" style="font-size: 11px; border-top: 1px solid; padding-top: 3px;">DEKABR</span>
+            </div>
+            <p style="font-weight: 600; letter-spacing: 3px;" data-aos="fade-up">2026</p>
+        </div>
+
+        <div class="invitation-body" id="invitation-text" data-aos="fade-up">
+            "Hayotimizning eng go'zal damlarini siz azizlar bilan birga baham ko'rishdan mamnunmiz. Nikoh to'yimizga tashrif buyurishingiz biz uchun katta sharafdir."
+        </div>
+
+        <div class="map-section">
+            <img src="restoran.png" class="res-img" data-aos="fade-right" alt="Ideal SS">
+            <h3 id="restoran-name" data-aos="fade-left">"IDEAL SS" RESTORANI</h3>
+            <p id="address-text" data-aos="fade-left" style="color: #777;">Surxondaryo viloyati, Sho'rchi tumani</p>
+            
+            <a href="https://maps.app.goo.gl/CpZnA8ug8iPZjGwt7" class="btn btn-google" data-aos="zoom-in-up">GOOGLE MAPS</a>
+            <a href="https://yandex.uz/maps/org/8650108130/" class="btn btn-yandex" data-aos="zoom-in-up" data-aos-delay="200">YANDEX XARITA</a>
+        </div>
+
+        <div class="timer-container">
+            <h3 id="timer-title" data-aos="fade-down">TO'YGA QOLDI:</h3>
+            <div class="timer-grid">
+                <div class="t-item" data-aos="fade-up" data-aos-delay="100"><span id="d">00</span><small id="label-day">Kun</small></div>
+                <div class="t-item" data-aos="fade-up" data-aos-delay="200"><span id="h">00</span><small id="label-hour">Soat</small></div>
+                <div class="t-item" data-aos="fade-up" data-aos-delay="300"><span id="m">00</span><small id="label-min">Min</small></div>
+            </div>
+        </div>
+
+        <div style="padding: 60px 20px;">
+            <img src="rings.png" width="80" data-aos="zoom-in" alt="Uzuklar">
+            <p id="footer-text" style="font-size: 18px; color: #2b3a8c; margin-top: 20px; font-weight: 600; font-family: 'Dancing Script', cursive;">Sizni kutib qolamiz!</p>
+        </div>
+    </div>
+
+    <audio id="muzika" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        const translations = {
+            uz: {
+                tap: "OCHISH UCHUN BOSING",
+                sub: "Sizni taklif etamiz",
+                month: "DEKABR",
+                invitation: "Hayotimizning eng go'zal damlarini siz azizlar bilan birga baham ko'rishdan mamnunmiz. Nikoh to'yimizga tashrif buyurishingiz biz uchun katta sharafdir.",
+                restoran: '"IDEAL SS" RESTORANI',
+                address: "Surxondaryo viloyati, Sho'rchi tumani",
+                timer: "TO'YGA QOLDI:",
+                day: "Kun", hour: "Soat", min: "Min",
+                footer: "Sizni kutib qolamiz!"
+            },
+            cyrillic: {
+                tap: "ОЧИШ УЧУН БОСИНГ",
+                sub: "Сизни таклиф этамиз",
+                month: "ДЕКАБРЬ",
+                invitation: "Ҳаётимизнинг энг гўзал дамларини сиз азизлар билан бирга баҳам кўришдан мамнунмиз. Никоҳ тўйимизга ташриф буюришингиз биз учун катта шарафдир.",
+                restoran: '"IDEAL SS" РЕСТОРАНИ',
+                address: "Сурхондарё вилояти, Шўрчи тумани",
+                timer: "ТЎЙГА ҚОЛДИ:",
+                day: "Кун", hour: "Соат", min: "Мин",
+                footer: "Сизни кутиб қоламиз!"
+            }
+        };
+
+        function changeLang(lang) {
+            // Tugma rangini yangilash
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Matnlarni almashtirish
+            document.getElementById('tap-text').innerText = translations[lang].tap;
+            document.getElementById('sub-text').innerText = translations[lang].sub;
+            document.getElementById('month-text').innerText = translations[lang].month;
+            document.getElementById('invitation-text').innerText = translations[lang].invitation;
+            document.getElementById('restoran-name').innerText = translations[lang].restoran;
+            document.getElementById('address-text').innerText = translations[lang].address;
+            document.getElementById('timer-title').innerText = translations[lang].timer;
+            document.getElementById('label-day').innerText = translations[lang].day;
+            document.getElementById('label-hour').innerText = translations[lang].hour;
+            document.getElementById('label-min').innerText = translations[lang].min;
+            document.getElementById('footer-text').innerText = translations[lang].footer;
+        }
+
+        function openMe() {
+            document.getElementById('envelope').style.transform = 'translateY(-100vh)';
+            document.getElementById('content').style.display = 'block';
+            
+            setTimeout(() => {
+                AOS.init({ duration: 1200, once: true, offset: 100 });
+            }, 100);
+
+            let audio = document.getElementById('muzika');
+            audio.play().catch(e => console.log("Musiqa qo'lda yoqilishi kerak"));
+            setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            const target = new Date("December 27, 2026 18:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = target - now;
+            if (diff > 0) {
+                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            }
+        }
+    </script>
+</body>
+</html>
